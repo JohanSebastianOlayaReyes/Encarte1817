@@ -34,6 +34,10 @@ namespace Entity.Context
         public DbSet<City> Cities { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Provider> Providers { get; set; }
+        public DbSet<Form> Forms { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<RolFormPermission> RolFormPermissions { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

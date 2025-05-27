@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entity.Dtos.ProviderDto
 {
-    class DeleteLogiProviderDto
+    public class DeleteLogiProviderDto : Base.BaseInfoDto
     {
+        public DeleteLogiProviderDto()
+        {
+            Status = false;
+        }
     }
 }
