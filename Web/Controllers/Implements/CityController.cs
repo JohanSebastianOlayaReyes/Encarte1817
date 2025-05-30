@@ -22,16 +22,22 @@ namespace Web.Controllers.Implements
             return dto.Id;
         }
 
-        [HttpPatch]
-        public async Task<IActionResult> UpdatePartialCity(int id, int cityId, [FromBody] UpdateCityDto dto)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartialCity(int id, [FromBody] UpdateCityDto dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (id != dto.Id)
+                return BadRequest("El ID en la ruta y en el cuerpo no coinciden.");
+
             try
             {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
                 var result = await _cityBusiness.UpdatePartialCityAsync(dto);
-                return Ok(new { Success = result });
+                if (!result)
+                    return NotFound($"Ciudad con ID {id} no encontrada.");
+
+                return Ok(new { Success = true });
             }
             catch (ArgumentException ex)
             {
@@ -42,7 +48,7 @@ namespace Web.Controllers.Implements
             {
                 _logger.LogError($"Error al actualizar parcialmente ciudad: {ex.Message}");
                 return StatusCode(500, "Error interno del servidor");
-            }
+           }
         }
 
         [HttpDelete("logic/{id}")]

@@ -1,6 +1,8 @@
-﻿using Data.Implements.BaseData;
+﻿using AutoMapper;
+using Data.Implements.BaseData;
 using Data.Interfaces;
 using Entity.Context;
+using Entity.Dtos.CityDto;
 using Entity.Model;
 using System;
 using System.Collections.Generic;
@@ -29,13 +31,23 @@ namespace Data.Implements.CityData
             return true;
         }
 
-        public async Task<bool> UpdatePartial(City city)
+        private readonly IMapper _mapper;
+
+        public CityData(ApplicationDbContext context, IMapper mapper) : base(context)
         {
-            var existingCity = await _context.Cities.FindAsync(city.Id);
+            _mapper = mapper;
+        }
+
+        public async Task<bool> UpdatePartial(UpdateCityDto cityDto)
+        {
+            var existingCity = await _context.Cities.FindAsync(cityDto.Id);
             if (existingCity == null) return false;
-            _context.Cities.Update(existingCity);
+
+            _mapper.Map(cityDto, existingCity);
+
             await _context.SaveChangesAsync();
             return true;
         }
+
     }
 }

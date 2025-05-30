@@ -16,6 +16,5 @@ namespace Entity.Model
         public DateTime DateOfJoining { get; set; }
         public ICollection<Client> Clients { get; set; }
         public ICollection<Provider> Providers { get; set; }
-        public object Provider { get; internal set; }
     }
 }

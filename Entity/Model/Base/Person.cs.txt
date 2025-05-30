@@ -1,5 +1,4 @@
-﻿using Entity.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +9,19 @@ namespace Entity.Model
     /// <summary>
     /// Entidad base para representar a una persona
     /// </summary>
-    public class Person : Base.BaseInfo
+    public class Person : Base.BaseModel
     {
-        public TypeIdentification TypeIdentification { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string TypeIdentification { get; set; }
         public int NumberIdentification { get; set; }
-
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         // Relación con ubicación geográfica
         public int? NeighborhoodId { get; set; }
         public virtual Neighborhood Neighborhood { get; set; }
 
         // Propiedades calculadas
-        //public string FullName => $"{FirstName} {LastName}";
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

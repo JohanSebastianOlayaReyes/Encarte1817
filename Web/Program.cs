@@ -21,13 +21,6 @@ using Business.Services;
 using Data.Implements.BaseDate;
 using Data.Implements.BaseData;
 
-
-
-
-
-
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add controllers
@@ -105,7 +98,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-var origenesPermitidos = builder.Configuration.GetValue<string>("origenesPermitidos")!.Split(";");
+var origenesPermitidos = builder.Configuration.GetValue<string>("OrigenesPermitidos")!.Split(";");
 {
     builder.Services.AddCors(options =>
     {
@@ -178,6 +171,5 @@ var origenesPermitidos = builder.Configuration.GetValue<string>("origenesPermiti
     }
 
     app.Run();
-
 
 }

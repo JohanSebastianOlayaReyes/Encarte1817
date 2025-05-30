@@ -13,7 +13,10 @@ namespace Utilities.Mappers.Profiles
     {
         public CityProfile()
         {
-            CreateMap<City, CityDto>().ReverseMap();
+            CreateMap<City, UpdateCityDto>().ReverseMap();
+
+            CreateMap<UpdateCityDto, City>()
+                .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }

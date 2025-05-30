@@ -32,9 +32,7 @@ namespace Business.Implements
             if (dto.Id <= 0)
                 throw new ArgumentException("ID inválido.");
 
-            var city = _mapper.Map<City>(dto);
-            var result = await _cityData.UpdatePartial(city);
-            return result;
+            return await _cityData.UpdatePartial(dto);
         }
 
         /// <summary>
